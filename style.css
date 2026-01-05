@@ -1,0 +1,397 @@
+:root{
+  --bg:#050617;
+  --bg2:#070a22;
+
+  --text:#eaf0ff;
+  --muted:rgba(234,240,255,.70);
+  --muted2:rgba(234,240,255,.50);
+
+  --line:rgba(255,255,255,.10);
+
+  --p1:#8a2be2;   /* purple */
+  --c1:#00d4ff;   /* cyan */
+  --b1:#2b5cff;   /* blue */
+  --radius:22px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--text);
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(1200px 700px at 70% 20%, rgba(0,212,255,.18), transparent 60%),
+    radial-gradient(900px 560px at 25% 20%, rgba(138,43,226,.20), transparent 60%),
+    radial-gradient(1100px 800px at 70% 90%, rgba(43,92,255,.18), transparent 60%),
+    linear-gradient(180deg, var(--bg2), var(--bg));
+}
+
+/* حركة الألوان (Orbs) */
+body::before{
+  content:"";
+  position:fixed; inset:-18%;
+  pointer-events:none;
+  z-index:-2;
+
+  background:
+    radial-gradient(520px 520px at 18% 25%, rgba(138,43,226,.55), transparent 60%),
+    radial-gradient(520px 520px at 82% 30%, rgba(0,212,255,.45), transparent 60%),
+    radial-gradient(620px 620px at 70% 85%, rgba(43,92,255,.45), transparent 60%);
+  filter: blur(24px);
+  opacity:.65;
+
+  animation: floatOrbs 16s ease-in-out infinite;
+  transform: translate3d(0,0,0);
+}
+@keyframes floatOrbs{
+  0%{   transform: translate(-1.5%, -1%) scale(1); }
+  50%{  transform: translate( 1.5%,  1.2%) scale(1.03); }
+  100%{ transform: translate(-1.5%, -1%) scale(1); }
+}
+
+/* Noise overlay (اذا موجود بالـ HTML) */
+.noise{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.08;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size:260px 260px;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ===== Layout ===== */
+.container{
+  width:min(1180px, 94%);
+  margin:0 auto;
+  padding:42px 0 56px;
+}
+
+/* ===== Hero Glass Card ===== */
+.hero{
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.10);
+
+  background:
+    radial-gradient(900px 300px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+
+  padding: 56px 46px 44px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* Border glow */
+.hero::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background: conic-gradient(from 180deg,
+    rgba(138,43,226,0),
+    rgba(0,212,255,.26),
+    rgba(43,92,255,.20),
+    rgba(138,43,226,.16),
+    rgba(138,43,226,0)
+  );
+  filter: blur(18px);
+  opacity:.38;
+  animation: spin 12s linear infinite;
+  pointer-events:none;
+}
+@keyframes spin{ to{ transform: rotate(360deg);} }
+.hero > *{ position:relative; z-index:2; }
+
+/* badge */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 12px 26px rgba(0,0,0,.22);
+  font-weight:900;
+}
+.badge .dot{
+  width:10px;height:10px;border-radius:50%;
+  background: linear-gradient(90deg, var(--p1), var(--c1));
+  box-shadow:0 0 18px rgba(0,212,255,.55);
+}
+
+/* logo container – NO glass card */
+.avatar{
+  width: 620px;          
+  max-width: 78vw;
+  margin: 16px auto 18px;
+
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.avatar img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+
+  /* توهج خفيف جدًا */
+  filter:
+    drop-shadow(0 0 10px rgba(0,212,255,.25));
+}
+
+
+.avatar:hover{
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* title */
+.name{
+  margin: 6px 0 8px;
+  font-size: clamp(34px, 4.6vw, 60px);
+  font-weight: 900;
+  letter-spacing:.2px;
+
+  background: linear-gradient(90deg, rgba(0,212,255,.95), rgba(138,43,226,.95));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 0 30px rgba(0,212,255,.12);
+}
+
+.tagline{
+  margin:0;
+  font-size: 16px;
+  color: rgba(255,255,255,.80);
+  line-height:1.8;
+}
+
+/* chips */
+.chips{
+  margin-top: 18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+.chip{
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.14);
+  color: rgba(255,255,255,.78);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+/* ===== Links (NO boxes) ===== */
+.links{
+  margin-top: 34px;
+  width: min(880px, 100%);
+  margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  gap: 22px;
+  text-align:right; /* عشان العربي يكون طبيعي */
+}
+
+.link-box{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: 18px;
+
+  padding: 8px 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+
+  transition: .22s ease;
+  color: rgba(255,255,255,.90);
+  position:relative;
+}
+
+/* soft divider */
+.link-box + .link-box{
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.left{
+  display:flex;
+  align-items:flex-start;
+  gap: 12px;
+}
+
+/* icon WITHOUT box (this fixes the weird lines) */
+.icon{
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(0,212,255,.92);
+  margin-top: 2px;
+}
+
+.link-title{
+  margin:0 0 6px;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.link-desc{
+  margin:0;
+  color: var(--muted2);
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.arrow{
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(0,212,255,.92);
+  transition:.22s ease;
+  margin-top: 6px;
+}
+
+.link-box:hover{
+  transform: translateX(-6px);
+  color:#fff;
+}
+.link-box:hover .arrow{
+  transform: translateX(-10px);
+}
+.link-box:focus-visible{
+  outline:none;
+  box-shadow: 0 0 0 4px rgba(0,212,255,.14);
+  border-radius: 12px;
+}
+
+/* mini buttons */
+.mini-actions{
+  margin-top: 26px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.mini-btn{
+  padding: 10px 14px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  font-weight: 900;
+  transition:.18s ease;
+}
+.mini-btn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(0,212,255,.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,.30);
+}
+
+/* card (for other pages) */
+.card{
+  padding: 18px;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+}
+
+/* footer */
+.footer{
+  margin-top: 18px;
+  text-align:center;
+  color: rgba(234,240,255,.55);
+  font-size: 13px;
+}
+
+/* entry animation */
+.hero, .link-box{
+  opacity:0;
+  transform: translateY(14px);
+  transition: .7s ease;
+}
+.hero.show, .link-box.show{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* responsive */
+@media (max-width:700px){
+  .container{ width:92%; padding:30px 0 46px; }
+  .hero{ padding: 34px 18px 30px; }
+  .tagline{ font-size: 14px; }
+  .link-title{ font-size: 18px; }
+  .link-desc{ font-size: 13px; }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  body::before{ animation:none; }
+  .hero::before{ animation:none; }
+  .hero, .link-box{ transition:none; }
+}
+/* ===== PROJECTS PAGE: remove big box ===== */
+.hero--flat{
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  padding: 0 0 32px !important;
+  margin-top: 0 !important;
+}
+
+/* نشيل الـ glow حق الهيرو */
+.hero--flat::before{
+  display:none !important;
+}
+
+/* العنوان يكون واضح وكبير */
+.hero--flat .name{
+  font-size: clamp(40px, 5vw, 64px);
+  text-align: right;
+  margin-bottom: 8px;
+}
+
+/* الوصف */
+.hero--flat .tagline{
+  text-align: right;
+  max-width: 640px;
+  font-size: 15px;
+  color: rgba(255,255,255,.75);
+}
+
+/* زر الرجوع للرئيسية بدون كرت */
+.hero--flat .links{
+  margin-top: 18px;
+  width: 100%;
+  max-width: 880px;
+  text-align: right;
+}
+
+/* نفس ستايل الليست تحت */
+.hero--flat .link-box{
+  padding: 8px 0;
+  border: none;
+}
+.hero--flat .link-box + .link-box{
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 18px;
+}
