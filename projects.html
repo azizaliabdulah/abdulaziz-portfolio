@@ -69,6 +69,21 @@
         <div class="arrow">Report</div>
       </div>
 
+      <div class="work-card">
+  <h3>Task Management Dashboard</h3>
+  <p>
+    لوحة تحكم لإدارة المشاريع والمهام، مبنية باستخدام
+    <b>Next.js</b> - <b>TypeScript</b> - <b>Tailwind</b>.
+    تدعم تتبع الحالات، الأولويات، وإحصائيات مباشرة لمدير القسم.
+  </p>
+
+  <button class="view-project" onclick="openGallery()" aria-label="عرض صور المشروع">
+  <span class="icon">👀</span>
+  <span class="text">عرض صور المشروع</span>
+</button>
+
+
+
       <a class="link-box" href="./contact.html">
         <div class="left">
           <div class="icon">📩</div>
@@ -86,5 +101,15 @@
   </div>
 
   <script src="./script.js" defer></script>
+
+  <div id="galleryModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeGallery()">×</span>
+
+    <img src="./assets/task1.png" alt="Dashboard Overview" />
+    <img src="./assets/task2.png" alt="Projects Section" />
+  </div>
+</div>
+
 </body>
 </html>
