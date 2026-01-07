@@ -15,3 +15,11 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.18 });
 
 els.forEach((el) => io.observe(el));
+
+function openGallery(){
+  document.getElementById("galleryModal").style.display = "block";
+}
+
+function closeGallery(){
+  document.getElementById("galleryModal").style.display = "none";
+}
